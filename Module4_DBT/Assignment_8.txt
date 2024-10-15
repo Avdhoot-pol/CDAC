@@ -1,0 +1,59 @@
+1) Assume each salesperson has a 12% commission. Write a query on the orders
+table that will produce the order number, the salesperson number, and the amount
+of the salesperson’s commission for that order.
+-> Select Onum, Snum, amt, (amt*0.12) as SalesCommission
+   From Orders;
++------+------+---------+-----------------+
+| Onum | Snum | amt     | SalesCommission |
++------+------+---------+-----------------+
+| 3001 | 1007 |   18.69 |            2.24 |
+| 3003 | 1001 |  767.19 |           92.06 |
+| 3002 | 1004 | 1900.10 |          228.01 |
+| 3005 | 1002 | 5160.45 |          619.25 |
+| 3006 | 1007 | 1098.16 |          131.78 |
+| 3009 | 1003 | 1713.23 |          205.59 |
+| 3007 | 1002 |   75.75 |            9.09 |
+| 3008 | 1001 | 4723.00 |          566.76 |
+| 3000 | 1002 | 1309.95 |          157.19 |
+| 3001 | 1001 | 9891.88 |         1187.03 |
++------+------+---------+-----------------+
+10 rows in set (0.10 sec)
+
+2) Write a query on the Customers table that will find the     highest rating in each city.
+ Put the output in this form:
+ For the city (city), the highest rating is : (rating).
+-> Select City, Concat('For the city ', city,' the highest rating ',Max(rating)) as HighestRating
+   From Customers
+   Group by City;
+
+
+
+3) Write a query that lists customers in descending order of rating. Output the rating
+field first, followed by the customer’s name and number.
+-> select * from Customers
+   Order by rating;
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | London   |    100 | 1001 |
+| 2005 | Clemens  | London   |    100 | 1001 |
+| 2007 | Pereira  | Rome     |    100 | 1004 |
+| 2002 | Giovanni | Rome     |    200 | 1002 |
+| 2003 | Liu      | San Jose |    200 | 1003 |
+| 2004 | Grass    | Berlin   |    300 | 1002 |
+| 2006 | Cisneros | San Jose |    300 | 1007 |
++------+----------+----------+--------+------+
+7 rows in set (0.00 sec)
+
+
+4) Write a query that totals the orders for each day and places the results in
+descending order.
+-> select Odate, Sum(amt) as TotalOrders
+   From Orders
+   Order By TotalOrders DESC;
+   +------------+-------------+
+| Odate      | TotalOrders |
++------------+-------------+
+| 1990-10-03 |    26658.40 |
++------------+-------------+
+1 row in set (0.10 sec)

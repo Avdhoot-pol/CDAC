@@ -1,0 +1,222 @@
+
+mysql> GRANT ALL PRIVILEGES ON cdacmumbai.* TO 'avdhoot'@'localhost';
+Query OK, 0 rows affected (0.51 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> SHOW GRANTS FOR 'avdhoot'@'localhost';
++-----------------------------------------------------------------+
+| Grants for avdhoot@localhost                                    |
++-----------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `avdhoot`@`localhost`                     |
+| GRANT ALL PRIVILEGES ON `cdacmumbai`.* TO `avdhoot`@`localhost` |
+| GRANT ALL PRIVILEGES ON `mysql`.* TO `avdhoot`@`localhost`      |
++-----------------------------------------------------------------+
+3 rows in set (0.00 sec)
+
+
+
+
+Q1.Create Table For Sales people
+mysql> use cdacmumbai;
+Database changed
+mysql> create table salespeople(
+    -> Snum int(4),
+    -> Sname varchar(10),
+    -> City varchar(10),
+    -> Comm float(3.2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+mysql> create table salespeople(
+    -> Snum int(4),
+    -> Sname varchar(10),
+    -> City varchar(10),
+    -> Comm float(3.2));
+Query OK, 0 rows affected, 1 warning (2.42 sec)
+
+mysql> insert into salespeople(Snum,Sname,City,Comm)
+    -> values('1001','Peel','London','12');
+Query OK, 1 row affected (0.38 sec)
+
+mysql> insert into salespeople(Snum,Sname,City,Comm)
+    -> values('1002','Serres','San Jose','13')
+    -> values();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values()' at line 3
+mysql> insert into salespeople(Snum,Sname,City,Comm)
+    -> values('1002','Serres','San Jose','13'),
+    -> ('1003','Motika','London','11'),
+    -> ('1004','Rifkin','Barcelona','15'),
+    -> ('1003','Motika','London','11')
+    -> ;
+Query OK, 4 rows affected (0.29 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+mysql> select * from salespeople;
++------+--------+-----------+------+
+| Snum | Sname  | City      | Comm |
++------+--------+-----------+------+
+| 1001 | Peel   | London    |   12 |
+| 1002 | Serres | San Jose  |   13 |
+| 1003 | Motika | London    |   11 |
+| 1004 | Rifkin | Barcelona |   15 |
+| 1003 | Motika | London    |   11 |
++------+--------+-----------+------+
+5 rows in set (0.04 sec)
+
+mysql>
+
+
+2.Table for Customers
+mysql> create table Customers(
+    -> Cnum int(4),
+    -> Cname varchar(10),
+    -> City varchar(10),
+    -> Rating int(4),
+    -> Snum int(4);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 6
+mysql> create table Customers(
+    -> Cnum int(4),
+    -> Cname varchar(10),
+    -> City varchar(10),
+    -> Rating int(4),
+    -> Snum int(4));
+Query OK, 0 rows affected, 3 warnings (1.42 sec)
+
+mysql> insert into Customers(Cnum,Cname,City,Rating,Snum)
+    -> values('2001','Hoffman','London','100','1001'),
+    -> ('2002','Giovanni','Rome','200','1002'),
+    -> ('2002','Giovanni','Rome','200','1002'),
+    -> ;;;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+ERROR:
+No query specified
+
+ERROR:
+No query specified
+
+mysql> insert into Customers(Cnum,Cname,City,Rating,Snum)
+    -> values('2001','Hoffman','London','100','1001'),
+    -> ('2002','Giovanni','Rome','200','1002'),
+    -> ('2003','Liu','San Jose','200','1003'),
+    -> ('2004','Grass','Berlin','300','1002'),
+    -> ('2005','Clemens','London','100','1001'),
+    -> ('2006','Cisneros','San Jose','300','1007'),
+    -> ('2007','Pereira','Rome','100','1004');
+Query OK, 7 rows affected (0.36 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> selct * from Customers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selct * from Customers' at line 1
+mysql> select * from Customers;
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | London   |    100 | 1001 |
+| 2002 | Giovanni | Rome     |    200 | 1002 |
+| 2003 | Liu      | San Jose |    200 | 1003 |
+| 2004 | Grass    | Berlin   |    300 | 1002 |
+| 2005 | Clemens  | London   |    100 | 1001 |
+| 2006 | Cisneros | San Jose |    300 | 1007 |
+| 2007 | Pereira  | Rome     |    100 | 1004 |
++------+----------+----------+--------+------+
+7 rows in set (0.00 sec)
+
+
+3.Create Table For Orders
+mysql> create table Orders(
+    -> Onum int(4),
+    -> Amt float(7,2),
+    -> Odate date,
+    -> Cnum int(4),
+    -> Snum int(4));
+Query OK, 0 rows affected, 4 warnings (2.07 sec)
+
+mysql> select * from Orders;
+Empty set (0.03 sec)
+
+
+('3001','18.69','03-OC' at line 1
+mysql> INSERT INTO Orders (Onum, Amt, Odate, Cnum, Snum) VALUES
+    -> ('3001', 18.69, '1990-10-03', 2008, 1007),
+    -> ('3003', 767.19, '1990-10-03', 2001, 1001),
+    -> ('3002', 1900.10, '1990-10-03', 2007, 1004),
+    -> ('3005', 5160.45, '1990-10-03', 2003, 1002),
+    -> ('3006', 1098.16, '1990-10-03', 2008, 1007),
+    -> ('3009', 1713.23, '1990-10-03', 2002, 1003),
+    -> ('3007', 75.75, '1990-10-03', 2004, 1002),
+    -> ('3008', 4723.00, '1990-10-03', 2006, 1001),
+    -> ('3000', 1309.95, '1990-10-03', 2004, 1002),
+    -> ('3001', 9891.88, '1990-10-03', 2006, 1001);
+Query OK, 10 rows affected (0.24 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from Orders;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-03 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-03 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-03 | 2006 | 1001 |
+| 3000 | 1309.95 | 1990-10-03 | 2004 | 1002 |
+| 3001 | 9891.88 | 1990-10-03 | 2006 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

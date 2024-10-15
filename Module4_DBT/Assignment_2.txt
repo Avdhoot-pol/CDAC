@@ -1,0 +1,11 @@
+Q1.Which field of Customers Table is primary key?
+-> In Customers table primary key is Cnum. Primary key can be useful in identifying unique records in the table easily and can be used for referencing when we have to manipulate data.
+
+Q2.What is the 4th column of Customers Table?
+-> 4th Column of customers table is  
+
+Q3.What is another word for Row and column?
+-> Another word for row is Record or Tuple  and for column is attributes or Field.
+
+Q4.Why isn't possible to see first five rows of table?
+->

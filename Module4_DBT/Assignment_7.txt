@@ -1,0 +1,48 @@
+1) Write a query that counts all orders for October 3.
+-> Select COUNT(*) as OrderCount
+   From Orders
+   Where Odate = '1990-10-03'; 
+   
+
+2) Write a query that counts the number of different non-NULL city values in the Customers table.
+-> Select count(*) as CityCount 
+   From Customers
+   Where City is not null;
+3) Write a query that selects each customer’s smallest order.
+-> Select MIN(amt) as smallestorder
+   from Customers;
+
+4) Write a query that selects the first customer, in alphabetical order, whose name
+begins with G.
+-> Select * from Customers
+   Where Cname Like 'G%';
+
+5) Write a query that selects the highest rating in each city.
+-> Select City, Max(rating) as HighestRating
+   From Customers
+   Group BY City; 
+   
+
+6) Write a query that counts the number of salespeople registering orders for each
+day. (If a salesperson has more than one order on a given day, he or she should be counted only once.).
+-> Select Odate, Count(DISTINCT Snum) as Salespeoplecount
+   From Orders
+   Group by Odate;   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

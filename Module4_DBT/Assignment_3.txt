@@ -1,0 +1,16 @@
+Name:-Avdhoot Pol 
+ 
+ASSIGNMENT 3:-
+
+
+1) Does ANSI recognize the data type DATE? 
+-> Yes,ANSI recognizes the DATE data type.The date dat type gives the date in the format of YYYY-MM-DD format.
+   The supported range is '1000-01-01' to '9999-12-31'.
+
+
+2) Which subdivision of SQL is used to insert values in tables?
+-> To insert values in tables SQL has an insert statement to insert values into the specified table.
+   Syntax:- INSERT INTO TABLENAME values();
+   fOR E.G. INSERT INTO EMP values 
+            ('20','AMIT',5000,Mumbai);
+ 
