@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign In</title>
+    <style>
+        body {
+            background-image: url('img.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.8); 
+            padding: 40px;
+            width: 30%;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        .form-container h1 {
+            color: lightgrey;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .form-container input[type="text"], .form-container input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #fff;
+            border: none;
+            border-bottom: 3px solid black;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            width: 80%;
+            padding: 10px;
+            background-color: darkorange;
+            border: none;
+            border-radius: 10px;
+            color: black;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: orange;
+        }
+
+        .form-container .signup-link {
+            margin-top: 20px;
+            color: lightgrey;
+            font-size: 14px;
+        }
+
+        .form-container .signup-link a {
+            color: darkorange;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-container .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>Login</h1>
+        <input type="text" placeholder="Enter Username" required><br>
+        <input type="password" placeholder="Enter Password" required><br>
+        <button type="submit">Login</button>
+        
+        <div class="signup-link">
+            <p>Don't have an account? <a href="Sign_In.html">Sign_In Here</a></p>
+        </div>
+    </div>
+</body>
+</html>
