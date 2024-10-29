@@ -1,0 +1,91 @@
+Assignment – 14
+Entering, Deleting, and Changing Field Values.
+
+1) Write a command that puts the following values, in their given order, into the
+salespeople table: city – San Jose, name – Blanco, comm – NULL, cnum – 1100.
+
+mysql> INSERT INTO Salespeople (City, Sname, Comm, Snum)
+    -> VALUES ('San Jose', 'Blanco', NULL, 1100);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> Select * from salespeople;
++------+--------+-----------+------+
+| Snum | Sname  | City      | Comm |
++------+--------+-----------+------+
+| 1001 | Peel   | London    |   12 |
+| 1002 | Serres | San Jose  |   13 |
+| 1003 | Motika | London    |   11 |
+| 1004 | Rifkin | Barcelona |   15 |
+| 1003 | Motika | London    |   11 |
+| 1100 | Blanco | San Jose  | NULL |
++------+--------+-----------+------+
+6 rows in set (0.00 sec)
+
+2) Write a command that removes all orders from customer Clemens from the Orders table.
+
+mysql> Delete from Orders
+    -> Where cnum = (select cname from Customers where cname = 'Clemens');
+Query OK, 0 rows affected (0.03 sec)
+
+
+
+3) Write a command that increases the rating of all customers in Rome by 100.
+
+ Update Customers
+    -> SET rating = rating + 100
+    -> where city = 'Rome';
+Query OK, 2 rows affected (0.07 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from Customers;
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | London   |    100 | 1001 |
+| 2002 | Giovanni | Rome     |    300 | 1002 |
+| 2003 | Liu      | San Jose |    200 | 1003 |
+| 2004 | Grass    | Berlin   |    300 | 1002 |
+| 2005 | Clemens  | London   |    100 | 1001 |
+| 2006 | Cisneros | San Jose |    300 | 1007 |
+| 2007 | Pereira  | Rome     |    200 | 1004 |
++------+----------+----------+--------+------+
+7 rows in set (0.00 sec)
+
+
+4) Salesperson Serres has left the company. Assign her 
+customers to Motika.
+
+Update Customers
+SET snum = (Select snum From Salespeople Where sname = 'Motika' LIMIT 1)
+Where snum = (select snum from salespeople where sname = 'Serres' LIMIT 1);
+
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | London   |    100 | 1001 |
+| 2002 | Giovanni | Rome     |    300 | 1003 |
+| 2003 | Liu      | San Jose |    200 | 1003 |
+| 2004 | Grass    | Berlin   |    300 | 1003 |
+| 2005 | Clemens  | London   |    100 | 1001 |
+| 2006 | Cisneros | San Jose |    300 | 1007 |
+| 2007 | Pereira  | Rome     |    200 | 1004 |
++------+----------+----------+--------+------+
+7 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

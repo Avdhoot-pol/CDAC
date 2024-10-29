@@ -1,0 +1,111 @@
+Assignment – 13
+Using the UNION clause.
+1) Create a union of two queries that shows the names, cities, and ratings of all
+customers. Those with rating of 200 or greater will also have the words “High
+Rating”, while the others will have the words “Low Rating”.
+->
+mysql> Select Cname, City, Rating from Customers
+    -> Where Concat(Rating > 200, 'Higher Rating')
+    ->
+    -> UNION
+    ->
+    -> Select Cname, City, Rating from Customers
+    -> Where Concat(Rating < 200, 'Lower Rating');
++----------+----------+--------+
+| Cname    | City     | Rating |
++----------+----------+--------+
+| Grass    | Berlin   |    300 |
+| Cisneros | San Jose |    300 |
+| Hoffman  | London   |    100 |
+| Clemens  | London   |    100 |
+| Pereira  | Rome     |    100 |
++----------+----------+--------+
+5 rows in set, 14 warnings (0.11 sec)
+
+
+2) Write a command that produces the name and number of each salesperson and each customer with more than one current order. Put the results in alphabetical order.
+mysql> SELECT s.Sname, s.Snum, c.cname, c.cnum
+    -> From salespeople s
+    -> Join Orders o ON s.snum = o.snum
+    -> Join Customers c on o.cnum = c.cnum
+    -> GROUP BY s.Sname , s.Snum, c.Cname, c.cnum
+    -> HAVING COUNT(O.Onum) > 1
+    -> ORDER BY s.sname , c.cname;
++--------+------+----------+------+
+| Sname  | Snum | cname    | cnum |
++--------+------+----------+------+
+| Motika | 1003 | Giovanni | 2002 |
+| Peel   | 1001 | Cisneros | 2006 |
+| Serres | 1002 | Grass    | 2004 |
++--------+------+----------+------+
+3 rows in set (0.08 sec)
+
+
+3) Form a union of three queries. Have the first select the snums of all salespeople in San Jose; the second, the cnums of all customers in San Jose; and the third the onums of all orders on October 3.Retain duplicates between the last two queries but eliminate any redundancies between either of them and the first.
+(Note: in the sample tables as given, there would be no such redundancy. This is besides the point.)
+
+Select snum from salespeople
+Where City = 'San Jose'
+
+Union ALL
+
+Select cnum from Customers 
+Where City = 'San Jose'
+
+Union
+
+Select Onum from Orders
+Where Odate = '1990-10-03'
+AND onum NOT IN(
+    Select Snum From Salespeople
+    where city = 'San Jose')
+And Onum NOT IN (
+SELECT cnum From Customers
+Where City = 'San Jose'
+);
+mysql> SELECT snum
+    -> FROM Salespeople
+    -> WHERE City = 'San Jose'
+    -> UNION ALL
+    -> SELECT cnum
+    -> FROM Customers
+    -> WHERE City = 'San Jose'
+    -> UNION
+    -> SELECT Onum
+    -> FROM Orders
+    -> WHERE Odate = '1990-10-03';
++------+
+| snum |
++------+
+| 1002 |
+| 2003 |
+| 2006 |
+| 3001 |
+| 3003 |
+| 3002 |
+| 3005 |
+| 3006 |
+| 3009 |
+| 3007 |
+| 3008 |
+| 3000 |
++------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

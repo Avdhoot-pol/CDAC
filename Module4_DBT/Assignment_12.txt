@@ -1,0 +1,86 @@
+Assignment – 12
+Using the operators IN, ANY, and ALL.
+1) Write a query that selects all customers whose ratings are equal to or greater than
+ANY of Serres’.
+mysql> Select * from Customers
+    -> Where Rating >= ANY(Select Cname from Customers Where Cname='Serres'     -> );
+Empty set (0.00 sec)
+
+
+2) Write a query using ANY or ALL that will find all salespeople who have no
+customers located in their city.
+mysql> Select * from salespeople s
+    -> Where City = All(Select c.city From Customers c
+    -> Where c.snum = s.snum);
++------+-------+--------+------+
+| Snum | Sname | City   | Comm |
++------+-------+--------+------+
+| 1001 | Peel  | London |   12 |
++------+-------+--------+------+
+1 row in set (0.00 sec)
+
+3) Write a query that selects all orders for amounts greater than any for the
+customers in London.
+mysql> Select * from Orders
+    -> Where Amt >= ANY(Select city from Customers
+    -> Where city = 'LONDON');
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-03 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-03 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-03 | 2006 | 1001 |
+| 3000 | 1309.95 | 1990-10-03 | 2004 | 1002 |
+| 3001 | 9891.88 | 1990-10-03 | 2006 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+
+4) Write the above query using MIN or MAX. 
+
+mysql> Select * from Orders
+    -> Where Amt >= (Select MAX(amt) from Orders O
+    -> JOIN Customers on O.Cnum = Customers.Cnum
+    -> Where Customers.City = 'LONDON');
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-03 | 2002 | 1003 |
+| 3008 | 4723.00 | 1990-10-03 | 2006 | 1001 |
+| 3000 | 1309.95 | 1990-10-03 | 2004 | 1002 |
+| 3001 | 9891.88 | 1990-10-03 | 2006 | 1001 |
++------+---------+------------+------+------+
+8 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
